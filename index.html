@@ -8,30 +8,41 @@
   .stream { fill: none; opacity: 0.32; transition: opacity 0.2s; cursor: pointer; }
   .stream:hover, .stream.active { opacity: 0.88; }
   .stream.dim { opacity: 0.04; }
-  .feedback { fill: none; opacity: 0.4; transition: opacity 0.2s; }
+  .feedback { fill: none; opacity: 0.4; transition: opacity 0.2s; cursor: pointer; }
+  .feedback:hover, .feedback.active { opacity: 0.85; }
   .feedback.dim { opacity: 0.04; }
-  .sb { cursor: pointer; transition: opacity 0.15s; }
-  .sb.dim { opacity: 0.15; }
-  .cb { cursor: pointer; transition: opacity 0.15s; }
-  .cb.dim { opacity: 0.15; }
+
+  /* Stakeholder boxes */
+  .sb { cursor: pointer; transition: opacity 0.2s; }
+  .sb rect { transition: opacity 0.2s, filter 0.2s; }
+  .sb text { transition: opacity 0.2s; }
+  .sb.dim rect { opacity: 0.15; }
+  .sb.dim text { opacity: 0.15; }
+  .sb.highlighted rect { filter: brightness(0.88); stroke-width: 2.2 !important; }
+
+  /* Cluster boxes */
+  .cb { cursor: pointer; transition: opacity 0.2s; }
+  .cb rect { transition: opacity 0.2s, filter 0.2s; }
+  .cb text { transition: opacity 0.2s; }
+  .cb.dim rect { opacity: 0.15; }
+  .cb.dim text { opacity: 0.15; }
+  .cb.highlighted rect { filter: brightness(0.88); stroke-width: 2.2 !important; }
+  .cb.selected rect { filter: brightness(0.82); stroke-width: 2.8 !important; }
+
   .s-label { font-size: 10px; font-weight: 600; font-family: inherit; text-anchor: middle; dominant-baseline: middle; fill: #0A2A4A; }
-  .cl-label { font-size: 10px; font-weight: 600; font-family: inherit; text-anchor: middle; dominant-baseline: middle; }
+  .cl-label { font-size: 9.5px; font-weight: 600; font-family: inherit; text-anchor: middle; dominant-baseline: middle; }
   .group-label { font-size: 9px; font-weight: 700; font-family: inherit; text-anchor: middle; }
-  .feedback-label { font-size: 7.5px; fill: #8B2500; font-family: inherit; font-style: italic; }
 </style>
 </head>
 <body>
 <svg viewBox="0 0 980 860" xmlns="http://www.w3.org/2000/svg">
 
-<!-- TITLE -->
 <text font-size="13" font-weight="600" x="490" y="22" text-anchor="middle" fill="#222">Stakeholder groups, barrier types and root causes</text>
 <text font-size="8.5" x="490" y="38" text-anchor="middle" fill="#888">Stream thickness = number of barriers · Right-side arcs = root causes feeding back into barrier types · Click to highlight</text>
-
-<!-- COLUMN HEADERS -->
 <text font-size="10" font-weight="600" x="100" y="56" text-anchor="middle" fill="#333">Stakeholders</text>
 <text font-size="10" font-weight="600" x="680" y="56" text-anchor="middle" fill="#333">Barrier types &amp; root causes</text>
 
-<!-- STAKEHOLDER BOXES — blue -->
+<!-- STAKEHOLDER BOXES blue -->
 <g class="sb" id="ss0" onclick="hlS('s0')"><rect x="10" y="68" width="175" height="44" rx="6" fill="#D6E8F5" stroke="#1A6EA8" stroke-width="1.2"/><text class="s-label" x="97" y="90">Input providers</text></g>
 <g class="sb" id="ss1" onclick="hlS('s1')"><rect x="10" y="128" width="175" height="44" rx="6" fill="#D6E8F5" stroke="#1A6EA8" stroke-width="1.2"/><text class="s-label" x="97" y="150">Farmers</text></g>
 <g class="sb" id="ss2" onclick="hlS('s2')"><rect x="10" y="188" width="175" height="44" rx="6" fill="#D6E8F5" stroke="#1A6EA8" stroke-width="1.2"/><text class="s-label" x="97" y="210">Processors</text></g>
@@ -45,255 +56,194 @@
 <g class="sb" id="ss10" onclick="hlS('s10')"><rect x="10" y="668" width="175" height="44" rx="6" fill="#D6E8F5" stroke="#1A6EA8" stroke-width="1.2"/><text class="s-label" x="97" y="690">Financial staff</text></g>
 
 <!-- BARRIER TYPE GROUP -->
-<rect x="476" y="58" width="288" height="220" rx="8" fill="#FEF3E0" stroke="#D4860A" stroke-width="0.8" stroke-dasharray="5,3"/>
-<text class="group-label" x="620" y="72" fill="#D4860A">BARRIER TYPES</text>
-<g class="cb" id="cAW" onclick="hlC('AW')">
-  <rect x="486" y="80" width="258" height="35" rx="5" fill="#FCDFA0" stroke="#D4860A" stroke-width="1.2"/>
-  <text class="cl-label" x="615" y="97" fill="#7A4A00">Awareness gap  ·  n=7</text>
-</g>
-<g class="cb" id="cKN" onclick="hlC('KN')">
-  <rect x="486" y="125" width="258" height="65" rx="5" fill="#FCDFA0" stroke="#D4860A" stroke-width="1.2"/>
-  <text class="cl-label" x="615" y="157" fill="#7A4A00">Knowledge gap  ·  n=13</text>
-</g>
-<g class="cb" id="cTR" onclick="hlC('TR')">
-  <rect x="486" y="200" width="258" height="30" rx="5" fill="#FCDFA0" stroke="#D4860A" stroke-width="1.2"/>
-  <text class="cl-label" x="615" y="215" fill="#7A4A00">Transparency &amp; traceability deficit  ·  n=6</text>
-</g>
-<g class="cb" id="cRD" onclick="hlC('RD')">
-  <rect x="486" y="240" width="258" height="35" rx="5" fill="#FCDFA0" stroke="#D4860A" stroke-width="1.2"/>
-  <text class="cl-label" x="615" y="257" fill="#7A4A00">Relational disconnect  ·  n=7</text>
-</g>
+<rect x="476" y="68" width="288" height="224" rx="8" fill="#FEF3E0" stroke="#D4860A" stroke-width="0.8" stroke-dasharray="5,3"/>
+<text class="group-label" x="620" y="82" fill="#D4860A">BARRIER TYPES</text>
+<g class="cb" id="cAW" onclick="hlC('AW')"><rect x="486" y="90" width="258" height="35" rx="5" fill="#FCDFA0" stroke="#D4860A" stroke-width="1.2"/><text class="cl-label" x="615" y="107" fill="#7A4A00">Awareness gap · n=7</text></g>
+<g class="cb" id="cKN" onclick="hlC('KN')"><rect x="486" y="135" width="258" height="70" rx="5" fill="#FCDFA0" stroke="#D4860A" stroke-width="1.2"/><text class="cl-label" x="615" y="170" fill="#7A4A00">Knowledge gap · n=14</text></g>
+<g class="cb" id="cTR" onclick="hlC('TR')"><rect x="486" y="215" width="258" height="30" rx="5" fill="#FCDFA0" stroke="#D4860A" stroke-width="1.2"/><text class="cl-label" x="615" y="230" fill="#7A4A00">Transparency &amp; traceability deficit · n=6</text></g>
+<g class="cb" id="cRD" onclick="hlC('RD')"><rect x="486" y="255" width="258" height="35" rx="5" fill="#FCDFA0" stroke="#D4860A" stroke-width="1.2"/><text class="cl-label" x="615" y="272" fill="#7A4A00">Relational disconnect · n=7</text></g>
 
 <!-- ROOT CAUSE GROUP -->
-<rect x="476" y="292" width="288" height="390" rx="8" fill="#F5DDD4" stroke="#8B2500" stroke-width="0.8" stroke-dasharray="5,3"/>
-<text class="group-label" x="620" y="306" fill="#8B2500">ROOT CAUSES</text>
-<g class="cb" id="cED" onclick="hlC('ED')">
-  <rect x="486" y="314" width="258" height="105" rx="5" fill="#E8917A" stroke="#8B2500" stroke-width="1.2"/>
-  <text class="cl-label" x="615" y="366" fill="#3A0E00">Economic disincentives  ·  n=21</text>
-</g>
-<g class="cb" id="cPO" onclick="hlC('PO')">
-  <rect x="486" y="429" width="258" height="80" rx="5" fill="#E8917A" stroke="#8B2500" stroke-width="1.2"/>
-  <text class="cl-label" x="615" y="469" fill="#3A0E00">Policy &amp; institutional inertia  ·  n=16</text>
-</g>
-<g class="cb" id="cPA" onclick="hlC('PA')">
-  <rect x="486" y="519" width="258" height="30" rx="5" fill="#E8917A" stroke="#8B2500" stroke-width="1.2"/>
-  <text class="cl-label" x="615" y="534" fill="#3A0E00">Power asymmetry  ·  n=4</text>
-</g>
-<g class="cb" id="cSC" onclick="hlC('SC')">
-  <rect x="486" y="559" width="258" height="118" rx="5" fill="#E8917A" stroke="#8B2500" stroke-width="1.2"/>
-  <text class="cl-label" x="615" y="618" fill="#3A0E00">Systemic complexity  ·  n=26</text>
-</g>
+<rect x="476" y="300" width="288" height="383" rx="8" fill="#F5DDD4" stroke="#8B2500" stroke-width="0.8" stroke-dasharray="5,3"/>
+<text class="group-label" x="620" y="314" fill="#8B2500">ROOT CAUSES</text>
+<g class="cb" id="cED" onclick="hlC('ED')"><rect x="486" y="322" width="258" height="125" rx="5" fill="#E8917A" stroke="#8B2500" stroke-width="1.2"/><text class="cl-label" x="615" y="384" fill="#3A0E00">Economic disincentives · n=25</text></g>
+<g class="cb" id="cPO" onclick="hlC('PO')"><rect x="486" y="457" width="258" height="75" rx="5" fill="#E8917A" stroke="#8B2500" stroke-width="1.2"/><text class="cl-label" x="615" y="494" fill="#3A0E00">Policy &amp; institutional inertia · n=15</text></g>
+<g class="cb" id="cPA" onclick="hlC('PA')"><rect x="486" y="542" width="258" height="40" rx="5" fill="#E8917A" stroke="#8B2500" stroke-width="1.2"/><text class="cl-label" x="615" y="562" fill="#3A0E00">Power asymmetry · n=6</text></g>
+<g class="cb" id="cSC" onclick="hlC('SC')"><rect x="486" y="592" width="258" height="95" rx="5" fill="#E8917A" stroke="#8B2500" stroke-width="1.2"/><text class="cl-label" x="615" y="639" fill="#3A0E00">Systemic complexity · n=19</text></g>
 
-<!-- ══════════════════════════════════
-     FEEDBACK ARCS: root causes -> barrier types
-     Drawn on RIGHT side of cluster boxes (x=744 outward)
-     SC->AW:5, SC->KN:10, SC->TR:5, SC->RD:4
-     PO->KN:3, PO->TR:1, PO->RD:1
-     PA->AW:1, PA->RD:2
-     ED->AW:1
-     Width = count * 2, min 2
-     Arc goes from RC right edge, curves right, back to BT right edge
-     BT right edge x=744: AW mid=97, KN mid=157, TR mid=215, RD mid=257
-     RC right edge x=744: ED mid=366, PO mid=469, PA mid=534, SC mid=618
-══════════════════════════════════ -->
+<!-- FEEDBACK ARCS amber→terracotta gradient -->
+<path class="feedback" id="fb_SC_AW" data-from="SC" data-to="AW" stroke="#6B1800" stroke-width="12" d="M744,625 C900,625 900,107 744,107"/>
+<path class="feedback" id="fb_SC_KN" data-from="SC" data-to="KN" stroke="#6B1800" stroke-width="26" d="M744,633 C920,633 920,170 744,170"/>
+<path class="feedback" id="fb_SC_TR" data-from="SC" data-to="TR" stroke="#6B1800" stroke-width="12" d="M744,641 C910,641 910,230 744,230"/>
+<path class="feedback" id="fb_SC_RD" data-from="SC" data-to="RD" stroke="#6B1800" stroke-width="10" d="M744,649 C900,649 900,272 744,272"/>
+<path class="feedback" id="fb_PO_KN" data-from="PO" data-to="KN" stroke="#A83800" stroke-width="7" d="M744,480 C860,480 860,170 744,170"/>
+<path class="feedback" id="fb_PO_TR" data-from="PO" data-to="TR" stroke="#A83800" stroke-width="2" d="M744,490 C850,490 850,230 744,230"/>
+<path class="feedback" id="fb_PO_RD" data-from="PO" data-to="RD" stroke="#A83800" stroke-width="2" d="M744,500 C840,500 840,272 744,272"/>
+<path class="feedback" id="fb_PA_AW" data-from="PA" data-to="AW" stroke="#8B2500" stroke-width="2" d="M744,550 C830,550 830,107 744,107"/>
+<path class="feedback" id="fb_PA_RD" data-from="PA" data-to="RD" stroke="#8B2500" stroke-width="5" d="M744,560 C820,560 820,272 744,272"/>
+<path class="feedback" id="fb_ED_AW" data-from="ED" data-to="AW" stroke="#C85A2A" stroke-width="2" d="M744,368 C810,368 810,107 744,107"/>
 
-<!-- SC -> AW (n=5, w=10) -->
-<path class="feedback" id="fb_SC_AW" stroke="#8B2500" stroke-width="10"
-  d="M744,610 C900,610 900,97 744,97"/>
-<!-- SC -> KN (n=10, w=20) -->
-<path class="feedback" id="fb_SC_KN" stroke="#8B2500" stroke-width="20"
-  d="M744,620 C920,620 920,157 744,157"/>
-<!-- SC -> TR (n=5, w=10) -->
-<path class="feedback" id="fb_SC_TR" stroke="#8B2500" stroke-width="10"
-  d="M744,628 C910,628 910,215 744,215"/>
-<!-- SC -> RD (n=4, w=8) -->
-<path class="feedback" id="fb_SC_RD" stroke="#8B2500" stroke-width="8"
-  d="M744,636 C900,636 900,257 744,257"/>
-
-<!-- PO -> KN (n=3, w=6) -->
-<path class="feedback" id="fb_PO_KN" stroke="#C85A2A" stroke-width="6"
-  d="M744,461 C860,461 860,157 744,157"/>
-<!-- PO -> TR (n=1, w=2) -->
-<path class="feedback" id="fb_PO_TR" stroke="#C85A2A" stroke-width="2"
-  d="M744,469 C850,469 850,215 744,215"/>
-<!-- PO -> RD (n=1, w=2) -->
-<path class="feedback" id="fb_PO_RD" stroke="#C85A2A" stroke-width="2"
-  d="M744,477 C840,477 840,257 744,257"/>
-
-<!-- PA -> AW (n=1, w=2) -->
-<path class="feedback" id="fb_PA_AW" stroke="#A84400" stroke-width="2"
-  d="M744,528 C830,528 830,97 744,97"/>
-<!-- PA -> RD (n=2, w=4) -->
-<path class="feedback" id="fb_PA_RD" stroke="#A84400" stroke-width="4"
-  d="M744,536 C820,536 820,257 744,257"/>
-
-<!-- ED -> AW (n=1, w=2) -->
-<path class="feedback" id="fb_ED_AW" stroke="#D85A30" stroke-width="2"
-  d="M744,360 C810,360 810,97 744,97"/>
-
-<!-- Feedback label -->
-<text class="feedback-label" x="952" y="400" text-anchor="middle" transform="rotate(90,952,400)">root causes fuel barrier types →</text>
-
-<!-- ══════════════════════════════════
-     STAKEHOLDER -> CLUSTER STREAMS
-     Left: stakeholder right edge x=185
-     Right: cluster left edge x=486
-     Thickness = count * 2.2, min 1.5
-     Cluster mids: AW=97,KN=157,TR=215,RD=257,ED=366,PO=469,PA=534,SC=618
-     Stakeholder mids: s0=90,s1=150,s2=210,s3=270,s4=330,s5=390,
-                       s6=450,s7=510,s8=570,s9=630,s10=690
-══════════════════════════════════ -->
-
-<!-- s0: AW=2,KN=1,ED=5,SC=3 -->
-<path class="stream" id="str_s0_AW" data-s="s0" data-c="AW" stroke="#1A6EA8" stroke-width="4.4" d="M185,84 C336,84 336,97 486,97"/>
-<path class="stream" id="str_s0_KN" data-s="s0" data-c="KN" stroke="#1A6EA8" stroke-width="2.2" d="M185,88 C336,88 336,157 486,157"/>
-<path class="stream" id="str_s0_ED" data-s="s0" data-c="ED" stroke="#1A6EA8" stroke-width="11" d="M185,93 C336,93 336,366 486,366"/>
-<path class="stream" id="str_s0_SC" data-s="s0" data-c="SC" stroke="#1A6EA8" stroke-width="6.6" d="M185,97 C336,97 336,618 486,618"/>
-
-<!-- s1: AW=1,KN=1,RD=3,ED=6,PO=1,SC=3 -->
-<path class="stream" id="str_s1_AW" data-s="s1" data-c="AW" stroke="#1A6EA8" stroke-width="2.2" d="M185,144 C336,144 336,97 486,97"/>
-<path class="stream" id="str_s1_KN" data-s="s1" data-c="KN" stroke="#1A6EA8" stroke-width="2.2" d="M185,148 C336,148 336,157 486,157"/>
-<path class="stream" id="str_s1_RD" data-s="s1" data-c="RD" stroke="#1A6EA8" stroke-width="6.6" d="M185,152 C336,152 336,257 486,257"/>
-<path class="stream" id="str_s1_ED" data-s="s1" data-c="ED" stroke="#1A6EA8" stroke-width="13.2" d="M185,156 C336,156 336,366 486,366"/>
-<path class="stream" id="str_s1_PO" data-s="s1" data-c="PO" stroke="#1A6EA8" stroke-width="2.2" d="M185,162 C336,162 336,469 486,469"/>
-<path class="stream" id="str_s1_SC" data-s="s1" data-c="SC" stroke="#1A6EA8" stroke-width="6.6" d="M185,166 C336,166 336,618 486,618"/>
-
-<!-- s2: KN=1,TR=1,ED=3,SC=3 -->
-<path class="stream" id="str_s2_KN" data-s="s2" data-c="KN" stroke="#1A6EA8" stroke-width="2.2" d="M185,204 C336,204 336,157 486,157"/>
-<path class="stream" id="str_s2_TR" data-s="s2" data-c="TR" stroke="#1A6EA8" stroke-width="2.2" d="M185,208 C336,208 336,215 486,215"/>
-<path class="stream" id="str_s2_ED" data-s="s2" data-c="ED" stroke="#1A6EA8" stroke-width="6.6" d="M185,212 C336,212 336,366 486,366"/>
-<path class="stream" id="str_s2_SC" data-s="s2" data-c="SC" stroke="#1A6EA8" stroke-width="6.6" d="M185,216 C336,216 336,618 486,618"/>
-
-<!-- s3: TR=2,RD=1,ED=2,PO=1,SC=1 -->
-<path class="stream" id="str_s3_TR" data-s="s3" data-c="TR" stroke="#1A6EA8" stroke-width="4.4" d="M185,264 C336,264 336,215 486,215"/>
-<path class="stream" id="str_s3_RD" data-s="s3" data-c="RD" stroke="#1A6EA8" stroke-width="2.2" d="M185,268 C336,268 336,257 486,257"/>
-<path class="stream" id="str_s3_ED" data-s="s3" data-c="ED" stroke="#1A6EA8" stroke-width="4.4" d="M185,272 C336,272 336,366 486,366"/>
-<path class="stream" id="str_s3_PO" data-s="s3" data-c="PO" stroke="#1A6EA8" stroke-width="2.2" d="M185,276 C336,276 336,469 486,469"/>
-<path class="stream" id="str_s3_SC" data-s="s3" data-c="SC" stroke="#1A6EA8" stroke-width="2.2" d="M185,280 C336,280 336,618 486,618"/>
-
-<!-- s4: AW=2,KN=1,TR=3,RD=2,ED=1 -->
-<path class="stream" id="str_s4_AW" data-s="s4" data-c="AW" stroke="#1A6EA8" stroke-width="4.4" d="M185,322 C336,322 336,97 486,97"/>
-<path class="stream" id="str_s4_KN" data-s="s4" data-c="KN" stroke="#1A6EA8" stroke-width="2.2" d="M185,326 C336,326 336,157 486,157"/>
-<path class="stream" id="str_s4_TR" data-s="s4" data-c="TR" stroke="#1A6EA8" stroke-width="6.6" d="M185,330 C336,330 336,215 486,215"/>
-<path class="stream" id="str_s4_RD" data-s="s4" data-c="RD" stroke="#1A6EA8" stroke-width="4.4" d="M185,334 C336,334 336,257 486,257"/>
-<path class="stream" id="str_s4_ED" data-s="s4" data-c="ED" stroke="#1A6EA8" stroke-width="2.2" d="M185,338 C336,338 336,366 486,366"/>
-
-<!-- s5: AW=1,KN=2,PO=4,SC=2 -->
-<path class="stream" id="str_s5_AW" data-s="s5" data-c="AW" stroke="#1A6EA8" stroke-width="2.2" d="M185,382 C336,382 336,97 486,97"/>
-<path class="stream" id="str_s5_KN" data-s="s5" data-c="KN" stroke="#1A6EA8" stroke-width="4.4" d="M185,386 C336,386 336,157 486,157"/>
-<path class="stream" id="str_s5_PO" data-s="s5" data-c="PO" stroke="#1A6EA8" stroke-width="8.8" d="M185,394 C336,394 336,469 486,469"/>
-<path class="stream" id="str_s5_SC" data-s="s5" data-c="SC" stroke="#1A6EA8" stroke-width="4.4" d="M185,398 C336,398 336,618 486,618"/>
-
-<!-- s6: AW=1,KN=1,ED=2,PO=2,PA=2,SC=2 -->
-<path class="stream" id="str_s6_AW" data-s="s6" data-c="AW" stroke="#1A6EA8" stroke-width="2.2" d="M185,442 C336,442 336,97 486,97"/>
-<path class="stream" id="str_s6_KN" data-s="s6" data-c="KN" stroke="#1A6EA8" stroke-width="2.2" d="M185,446 C336,446 336,157 486,157"/>
-<path class="stream" id="str_s6_ED" data-s="s6" data-c="ED" stroke="#1A6EA8" stroke-width="4.4" d="M185,450 C336,450 336,366 486,366"/>
-<path class="stream" id="str_s6_PO" data-s="s6" data-c="PO" stroke="#1A6EA8" stroke-width="4.4" d="M185,454 C336,454 336,469 486,469"/>
-<path class="stream" id="str_s6_PA" data-s="s6" data-c="PA" stroke="#1A6EA8" stroke-width="4.4" d="M185,458 C336,458 336,534 486,534"/>
-<path class="stream" id="str_s6_SC" data-s="s6" data-c="SC" stroke="#1A6EA8" stroke-width="4.4" d="M185,462 C336,462 336,618 486,618"/>
-
-<!-- s7: KN=1,PO=4,SC=3 -->
-<path class="stream" id="str_s7_KN" data-s="s7" data-c="KN" stroke="#1A6EA8" stroke-width="2.2" d="M185,506 C336,506 336,157 486,157"/>
-<path class="stream" id="str_s7_PO" data-s="s7" data-c="PO" stroke="#1A6EA8" stroke-width="8.8" d="M185,514 C336,514 336,469 486,469"/>
-<path class="stream" id="str_s7_SC" data-s="s7" data-c="SC" stroke="#1A6EA8" stroke-width="6.6" d="M185,520 C336,520 336,618 486,618"/>
-
-<!-- s8: KN=2,RD=1,ED=1,SC=3 -->
-<path class="stream" id="str_s8_KN" data-s="s8" data-c="KN" stroke="#1A6EA8" stroke-width="4.4" d="M185,562 C336,562 336,157 486,157"/>
-<path class="stream" id="str_s8_RD" data-s="s8" data-c="RD" stroke="#1A6EA8" stroke-width="2.2" d="M185,568 C336,568 336,257 486,257"/>
-<path class="stream" id="str_s8_ED" data-s="s8" data-c="ED" stroke="#1A6EA8" stroke-width="2.2" d="M185,572 C336,572 336,366 486,366"/>
-<path class="stream" id="str_s8_SC" data-s="s8" data-c="SC" stroke="#1A6EA8" stroke-width="6.6" d="M185,576 C336,576 336,618 486,618"/>
-
-<!-- s9: KN=1,PO=4,PA=1,SC=4 -->
-<path class="stream" id="str_s9_KN" data-s="s9" data-c="KN" stroke="#1A6EA8" stroke-width="2.2" d="M185,622 C336,622 336,157 486,157"/>
-<path class="stream" id="str_s9_PO" data-s="s9" data-c="PO" stroke="#1A6EA8" stroke-width="8.8" d="M185,630 C336,630 336,469 486,469"/>
-<path class="stream" id="str_s9_PA" data-s="s9" data-c="PA" stroke="#1A6EA8" stroke-width="2.2" d="M185,636 C336,636 336,534 486,534"/>
-<path class="stream" id="str_s9_SC" data-s="s9" data-c="SC" stroke="#1A6EA8" stroke-width="8.8" d="M185,640 C336,640 336,618 486,618"/>
-
-<!-- s10: KN=2,ED=1,PA=1,SC=2 -->
-<path class="stream" id="str_s10_KN" data-s="s10" data-c="KN" stroke="#1A6EA8" stroke-width="4.4" d="M185,682 C336,682 336,157 486,157"/>
-<path class="stream" id="str_s10_ED" data-s="s10" data-c="ED" stroke="#1A6EA8" stroke-width="2.2" d="M185,688 C336,688 336,366 486,366"/>
-<path class="stream" id="str_s10_PA" data-s="s10" data-c="PA" stroke="#1A6EA8" stroke-width="2.2" d="M185,694 C336,694 336,534 486,534"/>
-<path class="stream" id="str_s10_SC" data-s="s10" data-c="SC" stroke="#1A6EA8" stroke-width="4.4" d="M185,698 C336,698 336,618 486,618"/>
+<!-- STREAMS -->
+<path class="stream" id="str_s0_AW" data-s="s0" data-c="AW" stroke="#1A6EA8" stroke-width="4.4" d="M185,84 C336,84 336,107 486,107"/>
+<path class="stream" id="str_s0_KN" data-s="s0" data-c="KN" stroke="#1A6EA8" stroke-width="2.2" d="M185,88 C336,88 336,170 486,170"/>
+<path class="stream" id="str_s0_ED" data-s="s0" data-c="ED" stroke="#1A6EA8" stroke-width="13.2" d="M185,93 C336,93 336,384 486,384"/>
+<path class="stream" id="str_s0_SC" data-s="s0" data-c="SC" stroke="#1A6EA8" stroke-width="4.4" d="M185,97 C336,97 336,639 486,639"/>
+<path class="stream" id="str_s1_AW" data-s="s1" data-c="AW" stroke="#1A6EA8" stroke-width="2.2" d="M185,144 C336,144 336,107 486,107"/>
+<path class="stream" id="str_s1_KN" data-s="s1" data-c="KN" stroke="#1A6EA8" stroke-width="2.2" d="M185,148 C336,148 336,170 486,170"/>
+<path class="stream" id="str_s1_RD" data-s="s1" data-c="RD" stroke="#1A6EA8" stroke-width="6.6" d="M185,152 C336,152 336,272 486,272"/>
+<path class="stream" id="str_s1_ED" data-s="s1" data-c="ED" stroke="#1A6EA8" stroke-width="15.4" d="M185,157 C336,157 336,384 486,384"/>
+<path class="stream" id="str_s1_PO" data-s="s1" data-c="PO" stroke="#1A6EA8" stroke-width="2.2" d="M185,163 C336,163 336,494 486,494"/>
+<path class="stream" id="str_s1_SC" data-s="s1" data-c="SC" stroke="#1A6EA8" stroke-width="4.4" d="M185,167 C336,167 336,639 486,639"/>
+<path class="stream" id="str_s2_KN" data-s="s2" data-c="KN" stroke="#1A6EA8" stroke-width="2.2" d="M185,204 C336,204 336,170 486,170"/>
+<path class="stream" id="str_s2_TR" data-s="s2" data-c="TR" stroke="#1A6EA8" stroke-width="2.2" d="M185,208 C336,208 336,230 486,230"/>
+<path class="stream" id="str_s2_ED" data-s="s2" data-c="ED" stroke="#1A6EA8" stroke-width="6.6" d="M185,213 C336,213 336,384 486,384"/>
+<path class="stream" id="str_s2_SC" data-s="s2" data-c="SC" stroke="#1A6EA8" stroke-width="4.4" d="M185,217 C336,217 336,639 486,639"/>
+<path class="stream" id="str_s3_TR" data-s="s3" data-c="TR" stroke="#1A6EA8" stroke-width="4.4" d="M185,264 C336,264 336,230 486,230"/>
+<path class="stream" id="str_s3_RD" data-s="s3" data-c="RD" stroke="#1A6EA8" stroke-width="2.2" d="M185,268 C336,268 336,272 486,272"/>
+<path class="stream" id="str_s3_ED" data-s="s3" data-c="ED" stroke="#1A6EA8" stroke-width="4.4" d="M185,273 C336,273 336,384 486,384"/>
+<path class="stream" id="str_s3_PO" data-s="s3" data-c="PO" stroke="#1A6EA8" stroke-width="2.2" d="M185,277 C336,277 336,494 486,494"/>
+<path class="stream" id="str_s3_SC" data-s="s3" data-c="SC" stroke="#1A6EA8" stroke-width="2.2" d="M185,281 C336,281 336,639 486,639"/>
+<path class="stream" id="str_s4_AW" data-s="s4" data-c="AW" stroke="#1A6EA8" stroke-width="4.4" d="M185,322 C336,322 336,107 486,107"/>
+<path class="stream" id="str_s4_KN" data-s="s4" data-c="KN" stroke="#1A6EA8" stroke-width="2.2" d="M185,326 C336,326 336,170 486,170"/>
+<path class="stream" id="str_s4_TR" data-s="s4" data-c="TR" stroke="#1A6EA8" stroke-width="6.6" d="M185,330 C336,330 336,230 486,230"/>
+<path class="stream" id="str_s4_RD" data-s="s4" data-c="RD" stroke="#1A6EA8" stroke-width="4.4" d="M185,334 C336,334 336,272 486,272"/>
+<path class="stream" id="str_s4_ED" data-s="s4" data-c="ED" stroke="#1A6EA8" stroke-width="2.2" d="M185,338 C336,338 336,384 486,384"/>
+<path class="stream" id="str_s5_AW" data-s="s5" data-c="AW" stroke="#1A6EA8" stroke-width="2.2" d="M185,382 C336,382 336,107 486,107"/>
+<path class="stream" id="str_s5_KN" data-s="s5" data-c="KN" stroke="#1A6EA8" stroke-width="4.4" d="M185,386 C336,386 336,170 486,170"/>
+<path class="stream" id="str_s5_PO" data-s="s5" data-c="PO" stroke="#1A6EA8" stroke-width="8.8" d="M185,394 C336,394 336,494 486,494"/>
+<path class="stream" id="str_s5_SC" data-s="s5" data-c="SC" stroke="#1A6EA8" stroke-width="4.4" d="M185,398 C336,398 336,639 486,639"/>
+<path class="stream" id="str_s6_AW" data-s="s6" data-c="AW" stroke="#1A6EA8" stroke-width="2.2" d="M185,442 C336,442 336,107 486,107"/>
+<path class="stream" id="str_s6_KN" data-s="s6" data-c="KN" stroke="#1A6EA8" stroke-width="2.2" d="M185,446 C336,446 336,170 486,170"/>
+<path class="stream" id="str_s6_ED" data-s="s6" data-c="ED" stroke="#1A6EA8" stroke-width="4.4" d="M185,450 C336,450 336,384 486,384"/>
+<path class="stream" id="str_s6_PO" data-s="s6" data-c="PO" stroke="#1A6EA8" stroke-width="4.4" d="M185,454 C336,454 336,494 486,494"/>
+<path class="stream" id="str_s6_PA" data-s="s6" data-c="PA" stroke="#1A6EA8" stroke-width="4.4" d="M185,458 C336,458 336,562 486,562"/>
+<path class="stream" id="str_s6_SC" data-s="s6" data-c="SC" stroke="#1A6EA8" stroke-width="4.4" d="M185,462 C336,462 336,639 486,639"/>
+<path class="stream" id="str_s7_KN" data-s="s7" data-c="KN" stroke="#1A6EA8" stroke-width="2.2" d="M185,502 C336,502 336,170 486,170"/>
+<path class="stream" id="str_s7_ED" data-s="s7" data-c="ED" stroke="#1A6EA8" stroke-width="2.2" d="M185,507 C336,507 336,384 486,384"/>
+<path class="stream" id="str_s7_PO" data-s="s7" data-c="PO" stroke="#1A6EA8" stroke-width="6.6" d="M185,513 C336,513 336,494 486,494"/>
+<path class="stream" id="str_s7_PA" data-s="s7" data-c="PA" stroke="#1A6EA8" stroke-width="2.2" d="M185,519 C336,519 336,562 486,562"/>
+<path class="stream" id="str_s7_SC" data-s="s7" data-c="SC" stroke="#1A6EA8" stroke-width="4.4" d="M185,524 C336,524 336,639 486,639"/>
+<path class="stream" id="str_s8_KN" data-s="s8" data-c="KN" stroke="#1A6EA8" stroke-width="4.4" d="M185,562 C336,562 336,170 486,170"/>
+<path class="stream" id="str_s8_RD" data-s="s8" data-c="RD" stroke="#1A6EA8" stroke-width="2.2" d="M185,567 C336,567 336,272 486,272"/>
+<path class="stream" id="str_s8_ED" data-s="s8" data-c="ED" stroke="#1A6EA8" stroke-width="2.2" d="M185,572 C336,572 336,384 486,384"/>
+<path class="stream" id="str_s8_SC" data-s="s8" data-c="SC" stroke="#1A6EA8" stroke-width="6.6" d="M185,577 C336,577 336,639 486,639"/>
+<path class="stream" id="str_s9_KN" data-s="s9" data-c="KN" stroke="#1A6EA8" stroke-width="2.2" d="M185,622 C336,622 336,170 486,170"/>
+<path class="stream" id="str_s9_PO" data-s="s9" data-c="PO" stroke="#1A6EA8" stroke-width="8.8" d="M185,630 C336,630 336,494 486,494"/>
+<path class="stream" id="str_s9_PA" data-s="s9" data-c="PA" stroke="#1A6EA8" stroke-width="4.4" d="M185,637 C336,637 336,562 486,562"/>
+<path class="stream" id="str_s9_SC" data-s="s9" data-c="SC" stroke="#1A6EA8" stroke-width="6.6" d="M185,642 C336,642 336,639 486,639"/>
+<path class="stream" id="str_s10_KN" data-s="s10" data-c="KN" stroke="#1A6EA8" stroke-width="6.6" d="M185,682 C336,682 336,170 486,170"/>
+<path class="stream" id="str_s10_ED" data-s="s10" data-c="ED" stroke="#1A6EA8" stroke-width="4.4" d="M185,688 C336,688 336,384 486,384"/>
+<path class="stream" id="str_s10_PA" data-s="s10" data-c="PA" stroke="#1A6EA8" stroke-width="2.2" d="M185,694 C336,694 336,562 486,562"/>
 
 <!-- LEGEND -->
-<rect x="10" y="758" width="680" height="52" rx="6" fill="none" stroke="#ddd" stroke-width="0.5"/>
-<rect x="22" y="770" width="14" height="14" rx="2" fill="#D6E8F5" stroke="#1A6EA8" stroke-width="1"/>
-<text font-size="8" x="42" y="781" fill="#555">Stakeholder groups</text>
-<rect x="22" y="788" width="14" height="14" rx="2" fill="#FCDFA0" stroke="#D4860A" stroke-width="1"/>
-<text font-size="8" x="42" y="799" fill="#555">Barrier types — how barriers manifest</text>
-<rect x="200" y="770" width="14" height="14" rx="2" fill="#E8917A" stroke="#8B2500" stroke-width="1"/>
-<text font-size="8" x="220" y="781" fill="#555">Root causes — why barriers exist</text>
-<line x1="200" y1="797" x2="235" y2="797" stroke="#8B2500" stroke-width="3" opacity="0.5"/>
-<text font-size="8" x="240" y="801" fill="#555">Root causes feed back into barrier types (right arcs)</text>
-<line x1="430" y1="775" x2="460" y2="775" stroke="#888" stroke-width="2" opacity="0.5"/>
-<text font-size="8" x="465" y="779" fill="#555">fewer barriers</text>
-<line x1="430" y1="793" x2="460" y2="793" stroke="#888" stroke-width="7" opacity="0.5"/>
-<text font-size="8" x="465" y="797" fill="#555">more barriers</text>
-<text font-size="7.5" x="580" y="779" fill="#999">equal weighting</text>
-<text font-size="7.5" x="580" y="791" fill="#999">see annex for</text>
-<text font-size="7.5" x="580" y="803" fill="#999">citation-weighted version</text>
-
+<rect x="10" y="730" width="700" height="52" rx="6" fill="none" stroke="#ddd" stroke-width="0.5"/>
+<rect x="22" y="742" width="14" height="14" rx="2" fill="#D6E8F5" stroke="#1A6EA8" stroke-width="1"/>
+<text font-size="8" x="42" y="753" fill="#555">Stakeholder groups</text>
+<rect x="22" y="760" width="14" height="14" rx="2" fill="#FCDFA0" stroke="#D4860A" stroke-width="1"/>
+<text font-size="8" x="42" y="771" fill="#555">Barrier types</text>
+<rect x="160" y="742" width="14" height="14" rx="2" fill="#E8917A" stroke="#8B2500" stroke-width="1"/>
+<text font-size="8" x="180" y="753" fill="#555">Root causes</text>
+<line x1="160" y1="769" x2="195" y2="769" stroke="#8B2500" stroke-width="3" opacity="0.5"/>
+<text font-size="8" x="200" y="773" fill="#555">Root causes feed back into barrier types (right arcs — amber→terracotta)</text>
+<line x1="440" y1="747" x2="470" y2="747" stroke="#1A6EA8" stroke-width="2" opacity="0.5"/>
+<text font-size="8" x="475" y="751" fill="#555">fewer barriers</text>
+<line x1="440" y1="765" x2="470" y2="765" stroke="#1A6EA8" stroke-width="8" opacity="0.5"/>
+<text font-size="8" x="475" y="769" fill="#555">more barriers · equal weighting</text>
 </svg>
 
 <script>
-const sConn = {
+const sConn={
   s0:['AW','KN','ED','SC'], s1:['AW','KN','RD','ED','PO','SC'],
   s2:['KN','TR','ED','SC'], s3:['TR','RD','ED','PO','SC'],
   s4:['AW','KN','TR','RD','ED'], s5:['AW','KN','PO','SC'],
-  s6:['AW','KN','ED','PO','PA','SC'], s7:['KN','PO','SC'],
+  s6:['AW','KN','ED','PO','PA','SC'], s7:['KN','ED','PO','PA','SC'],
   s8:['KN','RD','ED','SC'], s9:['KN','PO','PA','SC'],
-  s10:['KN','ED','PA','SC']
+  s10:['KN','ED','PA']
 };
-const cConn = {
+const cConn={
   AW:['s0','s1','s4','s5','s6'],
   KN:['s0','s1','s2','s4','s5','s6','s7','s8','s9','s10'],
   TR:['s2','s3','s4'], RD:['s1','s3','s4','s8'],
-  ED:['s0','s1','s2','s3','s4','s6','s8','s10'],
+  ED:['s0','s1','s2','s3','s4','s6','s7','s8','s10'],
   PO:['s1','s3','s5','s6','s7','s9'],
-  PA:['s6','s9','s10'],
-  SC:['s0','s1','s2','s3','s5','s6','s7','s8','s9','s10']
+  PA:['s6','s7','s9','s10'],
+  SC:['s0','s1','s2','s3','s5','s6','s7','s8','s9']
 };
-const fbConn = {
-  SC:['AW','KN','TR','RD'], PO:['KN','TR','RD'],
-  PA:['AW','RD'], ED:['AW']
-};
-const btFromRC = {
-  AW:['SC','PA','ED'], KN:['SC','PO'], TR:['SC','PO'], RD:['SC','PO','PA']
-};
+const fbFrom={ SC:['fb_SC_AW','fb_SC_KN','fb_SC_TR','fb_SC_RD'], PO:['fb_PO_KN','fb_PO_TR','fb_PO_RD'], PA:['fb_PA_AW','fb_PA_RD'], ED:['fb_ED_AW'] };
+const fbTo={ AW:['fb_SC_AW','fb_PA_AW','fb_ED_AW'], KN:['fb_SC_KN','fb_PO_KN'], TR:['fb_SC_TR','fb_PO_TR'], RD:['fb_SC_RD','fb_PO_RD','fb_PA_RD'] };
+// which clusters are connected via feedback arcs
+const fbRC_for_BT={ AW:['SC','PA','ED'], KN:['SC','PO'], TR:['SC','PO'], RD:['SC','PO','PA'] };
+const fbBT_for_RC={ SC:['AW','KN','TR','RD'], PO:['KN','TR','RD'], PA:['AW','RD'], ED:['AW'] };
+
+function reset(){
+  document.querySelectorAll('.stream,.feedback').forEach(l=>l.classList.remove('active','dim'));
+  document.querySelectorAll('.sb,.cb').forEach(b=>b.classList.remove('dim','highlighted','selected'));
+}
 
 function hlS(s){
+  reset();
   const linked=sConn[s]||[];
+  // streams
   document.querySelectorAll('.stream').forEach(el=>{
     const m=el.getAttribute('data-s')===s;
     el.classList.toggle('active',m); el.classList.toggle('dim',!m);
   });
+  // dim all feedbacks
   document.querySelectorAll('.feedback').forEach(el=>el.classList.add('dim'));
-  document.querySelectorAll('.sb').forEach(el=>el.classList.toggle('dim',el.id!=='s'+s));
-  document.querySelectorAll('.cb').forEach(el=>el.classList.toggle('dim',!linked.includes(el.id.replace('c',''))));
+  // stakeholder boxes
+  document.querySelectorAll('.sb').forEach(el=>{
+    if(el.id==='s'+s){ el.classList.add('selected'); }
+    else { el.classList.add('dim'); }
+  });
+  // cluster boxes: highlight connected, dim others
+  document.querySelectorAll('.cb').forEach(el=>{
+    const c=el.id.replace('c','');
+    if(linked.includes(c)){ el.classList.add('highlighted'); }
+    else { el.classList.add('dim'); }
+  });
 }
+
 function hlC(c){
+  reset();
   const linked=cConn[c]||[];
-  const isBT=['AW','KN','TR','RD'].includes(c);
   const isRC=['ED','PO','PA','SC'].includes(c);
+  const isBT=['AW','KN','TR','RD'].includes(c);
+  // streams
   document.querySelectorAll('.stream').forEach(el=>{
     const m=el.getAttribute('data-c')===c;
     el.classList.toggle('active',m); el.classList.toggle('dim',!m);
   });
+  // feedback arcs
+  const activeFB=isRC?(fbFrom[c]||[]):isBT?(fbTo[c]||[]):[];
   document.querySelectorAll('.feedback').forEach(el=>{
-    const id=el.id;
-    let match=false;
-    if(isRC && id.startsWith('fb_'+c+'_')) match=true;
-    if(isBT && id.endsWith('_'+c)) match=true;
-    el.classList.toggle('active',match); el.classList.toggle('dim',!match);
+    const m=activeFB.includes(el.id);
+    el.classList.toggle('active',m); el.classList.toggle('dim',!m);
   });
-  document.querySelectorAll('.cb').forEach(el=>el.classList.toggle('dim',el.id!=='c'+c));
-  document.querySelectorAll('.sb').forEach(el=>el.classList.toggle('dim',!linked.includes(el.id.replace('s',''))));
+  // selected cluster box
+  document.querySelectorAll('.cb').forEach(el=>{
+    const ec=el.id.replace('c','');
+    if(ec===c){
+      el.classList.add('selected');
+    } else {
+      // also highlight feedback-connected clusters
+      const fbLinked=isRC?(fbBT_for_RC[c]||[]):isBT?(fbRC_for_BT[c]||[]):[];
+      if(linked.includes(ec)||fbLinked.includes(ec)){
+        el.classList.add('highlighted');
+      } else {
+        el.classList.add('dim');
+      }
+    }
+  });
+  // stakeholder boxes
+  document.querySelectorAll('.sb').forEach(el=>{
+    const sid=el.id.replace('s','');
+    if(linked.includes(sid)){ el.classList.add('highlighted'); }
+    else { el.classList.add('dim'); }
+  });
 }
+
 document.querySelector('svg').addEventListener('click',e=>{
-  if(!e.target.closest('.sb')&&!e.target.closest('.cb')){
-    document.querySelectorAll('.stream,.feedback').forEach(l=>l.classList.remove('active','dim'));
-    document.querySelectorAll('.sb,.cb').forEach(b=>b.classList.remove('dim'));
-  }
+  if(!e.target.closest('.sb')&&!e.target.closest('.cb')) reset();
 });
 </script>
 </body>
